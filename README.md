@@ -85,12 +85,12 @@ After adding validations, you can call `validate(arg).validatorName().validation
 Call `validate.setDefaultValidator(validatorName)` to set a default validator class. `validate(arg)` and `someValidator.validate(argName)` will return an instance of default validator class.
 
 ## Changelog
-### 2.0.0 2015-06-28
+### 2.0.0 (2015-06-28)
  - drop 'str' prefixed validations.
  - add concept of validator and make it extendable.
  - change the api of extention.
  - add some built-in type-checking validations.
  - refactor the codes.
 
-### 1.0.0 2015-06-27
+### 1.0.0 (2015-06-27)
  - first version.
