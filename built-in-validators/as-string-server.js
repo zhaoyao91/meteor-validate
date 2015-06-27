@@ -1,6 +1,6 @@
 var validator = Npm.require('validator');
 
-var funcList = [
+var validationsList = [
     'contains',
     'equals',
     'isAfter',
@@ -43,12 +43,11 @@ var funcList = [
     'matches'
 ];
 
-for (var i in funcList) {
-    var prefix = 'str';
-    var funcName = funcList[i];
-    validate.extend(prefix + capitalizeFirstLetter(funcName), validator[funcName]);
+var validationsMap = {};
+
+for (var i in validationsList) {
+    var name = validationsList[i];
+    validationsMap[name] = validator[name];
 }
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+validate.extendValidator('asString', validationsMap);

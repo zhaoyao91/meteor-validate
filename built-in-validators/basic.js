@@ -1,6 +1,8 @@
-validate.extend({
-    // optional
+validate.setDefaultValidator('basic');
 
+validate.putValidator('basic');
+
+validate.extendValidator('basic', {
     where: function (arg, func) {
         return func(arg);
     },
@@ -53,5 +55,41 @@ validate.extend({
             if (arg == values[i]) return false;
         }
         return true;
+    },
+
+    isUndefined: function (arg) {
+        return arg === undefined;
+    },
+
+    isNull: function (arg) {
+        return arg === null;
+    },
+
+    isNaN: function (arg) {
+        return arg !== arg;
+    },
+
+    isBoolean: function(arg) {
+        return typeof arg === 'boolean';
+    },
+
+    isNumber: function (arg) {
+        return typeof arg === 'number';
+    },
+
+    isString: function(arg) {
+        return typeof arg === 'string';
+    },
+
+    isFunction: function(arg) {
+        return typeof arg ==='function';
+    },
+
+    isObject: function(arg) {
+        return arg !== null && typeof arg === 'object';
+    },
+
+    isDate: function(arg) {
+        return arg instanceof Date;
     }
 });
