@@ -66,7 +66,7 @@ See [full list](https://github.com/chriso/validator.js#validators).
 The true power of this package is not the built-in validations, but the ability for easy extention.  
 
 ### Concepts
-A **Validator** is an object which hold the arg and a set of **Validations**. You create validator with arg, call validations on it, that's all.
+A **Validator** is an object which holds the arg and a set of **Validations**. You create a validator with the arg, call validations on it, that's all.
 There are 2 built-in validator classes: **basic** and **asString**. When you call `validate(arg).basic()` or `validate(arg).asString()`, you actually get a corresponding validator. Note that you can just call `validate(arg)` to get a basic validator because it's **default**.
 
 ### Add Validator
@@ -79,18 +79,18 @@ After adding validator class, you can call `validate(arg).validatorName()` to us
 Call `validate.extendValidator(validatorName, validations)` to add or override validations to a validator class.  
 After adding validations, you can call `validate(arg).validatorName().validationName(...)` to use it.
 
- - **validations** object - key is the validation name, value is a test function. a test function is function which returns boolean and takes any number of arguments, but the first is the arg to be validated.
+ - **validations** object - key is the validation name, value is a test function. a test function is function which returns boolean and takes any number of arguments, with the first arg to be validated.
 
 ### Default Validator
-Call `validate.setDefaultValidator(validatorName)` to set a default validator class. `validate(arg)` and `Validator.validate(argName)` will return an instance of default validator class.
+Call `validate.setDefaultValidator(validatorName)` to set a default validator class. `validate(arg)` and `someValidator.validate(argName)` will return an instance of default validator class.
 
 ## Changelog
-### 2.0.0
+### 2.0.0 2015-06-28
  - drop 'str' prefixed validations.
  - add concept of validator and make it extendable.
  - change the api of extention.
  - add some built-in type-checking validations.
  - refactor the codes.
 
-### 1.0.0
+### 1.0.0 2015-06-27
  - first version.
