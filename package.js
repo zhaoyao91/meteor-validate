@@ -1,6 +1,6 @@
 Package.describe({
     name: 'zhaoyao91:validate',
-    version: '2.1.0',
+    version: '2.2.0',
     summary: 'Validate arguments of methods in an easy way.',
     git: 'https://github.com/zhaoyao91/meteor-validate',
     documentation: 'README.md'

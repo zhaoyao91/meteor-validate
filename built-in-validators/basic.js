@@ -11,12 +11,24 @@ validate.extendValidator('basic', {
         return arg !== null && arg !== undefined;
     },
 
-    isType: function (arg, type) {
-        return typeof arg === type;
+    isType: function (arg, types) {
+        types = getArgArray(types, arguments);
+
+        for (var i in types) {
+            if (typeof arg === types[i]) return true;
+        }
+
+        return false;
     },
 
-    isClass: function (arg, clazz) {
-        return arg instanceof clazz;
+    isClass: function (arg, classes) {
+        classes = getArgArray(classes, arguments);
+
+        for (var i in classes) {
+            if (arg instanceof classes[i]) return true;
+        }
+
+        return false;
     },
 
     eq: function (arg, target) {
@@ -44,34 +56,20 @@ validate.extendValidator('basic', {
     },
 
     in: function (arg, values) {
-        // array
-        if (arguments.length === 2 && values.hasOwnProperty('length')) {
-            for (var i in values) {
-                if (arg == values[i]) return true;
-            }
-        }
-        // args ...
-        else {
-            for (var i = 1; i < arguments.length; i++ ) {
-                if (arg == arguments[i]) return true;
-            }
+        values = getArgArray(values, arguments);
+
+        for (var i in values) {
+            if (arg == values[i]) return true;
         }
 
         return false;
     },
 
     notIn: function (arg, values) {
-        // array
-        if (arguments.length === 2 && values.hasOwnProperty('length')) {
-            for (var i in values) {
-                if (arg == values[i]) return false;
-            }
-        }
-        // args ...
-        else {
-            for (var i = 1; i < arguments.length; i++ ) {
-                if (arg == arguments[i]) return false;
-            }
+        values = getArgArray(values, arguments);
+
+        for (var i in values) {
+            if (arg == values[i]) return false;
         }
 
         return true;
@@ -89,7 +87,7 @@ validate.extendValidator('basic', {
         return arg !== arg;
     },
 
-    isBoolean: function(arg) {
+    isBoolean: function (arg) {
         return typeof arg === 'boolean';
     },
 
@@ -97,19 +95,32 @@ validate.extendValidator('basic', {
         return typeof arg === 'number';
     },
 
-    isString: function(arg) {
+    isString: function (arg) {
         return typeof arg === 'string';
     },
 
-    isFunction: function(arg) {
-        return typeof arg ==='function';
+    isFunction: function (arg) {
+        return typeof arg === 'function';
     },
 
-    isObject: function(arg) {
+    isObject: function (arg) {
         return arg !== null && typeof arg === 'object';
     },
 
-    isDate: function(arg) {
+    isDate: function (arg) {
         return arg instanceof Date;
     }
 });
+
+function getArgArray(firstArg, args) {
+    if (Array.isArray(firstArg) && args.length === 2) {
+        return firstArg;
+    }
+    else {
+        var argArray = [];
+        for (var i = 1; i < args.length; i++) {
+            argArray[i - 1] = args[i];
+        }
+        return argArray;
+    }
+}

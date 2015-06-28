@@ -35,8 +35,8 @@ It's actually an extendable module with a very small set of core functions. You 
 - **optional()** - if the arg is null or undefined, the following validations will always pass.
 - **where(func)** - the func receives one arg(the arg to be validate) and returns boolean to tell if it's valid.
 - **exists()** - check if the arg is not null or undefined.
-- **isType(type)** - check if the arg is **typeof** the type.
-- **isClass(class)** - check if the arg is **instanceof** the class.
+- **isType(types)** - check if the arg is **typeof** any of types.
+- **isClass(classes)** - check if the arg is **instanceof** any of classes.
 - **eq(target)** - check if the arg equals the target. (==)
 - **neq(target)** - check if the arg not equals the target. (!=)
 - **gt(target)** - check if the arg is greater than target. (>)
@@ -85,6 +85,9 @@ After adding validations, you can call `validate(arg).validatorName().validation
 Call `validate.setDefaultValidator(validatorName)` to set a default validator class. `validate(arg)` and `someValidator.validate(argName)` will return an instance of default validator class.
 
 ## Changelog
+
+### 2.2.0 (2015-06-28)
+ - enhance `isType` and `isClass`, now you can specify more targets of **or** relation.
 
 ### 2.1.0 (2015-06-28)
  - optimize the syntax for `in` and `notIn`.
