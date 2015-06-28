@@ -85,6 +85,10 @@ After adding validations, you can call `validate(arg).validatorName().validation
 Call `validate.setDefaultValidator(validatorName)` to set a default validator class. `validate(arg)` and `someValidator.validate(argName)` will return an instance of default validator class.
 
 ## Changelog
+
+### 2.0.1 (2015-06-28)
+ - fix that when parent arg is null and optional, error occurs when validate sub fields.
+
 ### 2.0.0 (2015-06-28)
  - drop 'str' prefixed validations.
  - add concept of validator and make it extendable.
