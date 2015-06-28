@@ -86,6 +86,9 @@ Call `validate.setDefaultValidator(validatorName)` to set a default validator cl
 
 ## Changelog
 
+### 2.1.0 (2015-06-28)
+ - optimize the syntax for `in` and `notIn`.
+
 ### 2.0.1 (2015-06-28)
  - fix that when parent arg is null and optional, error occurs when validate sub fields.
 

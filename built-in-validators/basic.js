@@ -44,16 +44,36 @@ validate.extendValidator('basic', {
     },
 
     in: function (arg, values) {
-        for (var i in values) {
-            if (arg == values[i]) return true;
+        // array
+        if (arguments.length === 2 && values.hasOwnProperty('length')) {
+            for (var i in values) {
+                if (arg == values[i]) return true;
+            }
         }
+        // args ...
+        else {
+            for (var i = 1; i < arguments.length; i++ ) {
+                if (arg == arguments[i]) return true;
+            }
+        }
+
         return false;
     },
 
-    notIn: function (arg, values, week) {
-        for (var i in values) {
-            if (arg == values[i]) return false;
+    notIn: function (arg, values) {
+        // array
+        if (arguments.length === 2 && values.hasOwnProperty('length')) {
+            for (var i in values) {
+                if (arg == values[i]) return false;
+            }
         }
+        // args ...
+        else {
+            for (var i = 1; i < arguments.length; i++ ) {
+                if (arg == arguments[i]) return false;
+            }
+        }
+
         return true;
     },
 
