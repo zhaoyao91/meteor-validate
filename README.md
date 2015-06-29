@@ -89,9 +89,12 @@ In this way, `('sub field name')` is short for `.validate('sub field name')` and
 ## String Validations
 Thanks for [chriso/validator.js](https://github.com/chriso/validator.js),
 by calling `validate(arg).asString()`, you can switch to another set of validations which is designated for strings.  
-See [full list](https://github.com/chriso/validator.js#validators).  
-**Note**: As mentioned in the [doc](https://github.com/chriso/validator.js#strings-only), these validations are **strings only**, and after you call `asString()`, the arg will be treated as string by the rules.  
+See [full list](https://github.com/chriso/validator.js#validators).
+
+**Note**: As mentioned in the [doc](https://github.com/chriso/validator.js#strings-only), these validations are **strings only**, and after you call `asString()`, the arg will be treated as string by the rules.
+
 **Note**: As Meteor's `Npm.require` can only work on server side, these string validations can't be used on client side. Howere, you can create your own validator(validations) for replacement. If interested, read on.
+
 **Node**: After calling `.asString()`, you can't use the basic validations. you can call `.back()` to switch back and use those validations. For more, see the [advanced doc][advanced doc].
 
 ## Advanced Usage
