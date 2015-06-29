@@ -1,8 +1,8 @@
 validate.setDefaultValidator('basic');
 
-validate.putValidator('basic');
+validate.addValidator('basic');
 
-validate.extendValidator('basic', {
+validations = {
     where: function (arg, func) {
         return func(arg);
     },
@@ -109,8 +109,17 @@ validate.extendValidator('basic', {
 
     isDate: function (arg) {
         return arg instanceof Date;
+    },
+
+    isArray: function(arg) {
+        return Array.isArray(arg);
     }
-});
+
+};
+
+for (var name in validations) {
+    validate.addValidation('basic', name, validations[name]);
+}
 
 function getArgArray(firstArg, args) {
     if (Array.isArray(firstArg) && args.length === 2) {

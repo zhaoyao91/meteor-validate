@@ -1,6 +1,6 @@
 var validator = Npm.require('validator');
 
-var validationsList = [
+var validations = [
     'contains',
     'equals',
     'isAfter',
@@ -43,11 +43,7 @@ var validationsList = [
     'matches'
 ];
 
-var validationsMap = {};
-
-for (var i in validationsList) {
-    var name = validationsList[i];
-    validationsMap[name] = validator[name];
+for (var i in validations) {
+    var name = validations[i];
+    validate.addValidation('asString', name, validator[name]);
 }
-
-validate.extendValidator('asString', validationsMap);

@@ -11,25 +11,55 @@ It's actually an extendable module with a very small set of core functions. You 
 
 ## Basic Usage
 ### basic
-    // if validating fails, a Match.Error will be thrown on the server 
-    // and the client will receive the corresponding Meteor.Error with details.
-    validate(arg).exists(); // ensure arg is not null or undefined
+If validating fails, a Match.Error will be thrown on the server, 
+and the client will receive the corresponding Meteor.Error with details.
+
+    validate(arg).exists(); // check the arg is not null or undefined
+
+### optional
+If the arg is optional and is null or undefined, all the following validations will pass
+
+    validate(null).optional().isNumber(); // pass
 
 ### chain
+You can check an arg more than once in a validation chain.
+
     validate(arg).optional().isString();
     validate(arg).isDate().gt(new Date('2015-01-01')).lt(new Date('2015-12-31'));
 
 ### customized arg name
-    // the error msg will use the the second parameter as the name of arg
+The error msg will use the the second parameter as the name of the arg
+
     validate(arg, 'myArg').exists();
 
-### sub fields
-    // validating sub fields
-    var vArg = validate(arg).optional().isType('object'); // validate arg
-    vArg.validate('name').isType('string'); // validate arg.name
-    var vFriends = vArg.validate('friends').optional().isType('object'); // validate arg.friends
-    vFriends.validate('bob').isType('string'); // validate arg.friends.bob
-    vFriends.validate('alice').optional().isType('string'); // validate arg.friends.alice
+### sub fields (check object)
+If the arg is an object(or array), you can check it with all the sub fields in one chain!
+
+    validate(arg).isObject()
+        .validate('id').optional().isString().back()
+        .validate('projectId').optional().isString().back()
+        .validate('profile').optional().isObject()
+            .validate('user').optional().isString().back()
+            .validate('picture').optional().isString().back()
+            .validate('about').optional().isString().back()
+            .back()
+        .validate('role').optional().isString();
+        
+You can suppose that there is a corsur pointing to the arg after calling `validate(arg)`, and when you call `.validate('sub field name')`, the corsur moves forward to this sub field, and when you call `.back()`, it moves back to the parent field(arg).
+
+If you are already familiar with this pattern, there is a terser syntax for the same thing:
+
+    validate(arg).isObject()
+        ('id').optional().isString()()
+        ('projectId').optional().isString()()
+        ('profile').optional().isObject()
+            ('user').optional().isString()()
+            ('picture').optional().isString()()
+            ('about').optional().isString()()
+            ()
+        ('role').optional().isString();
+        
+In this way, `('sub field name')` is short for `.validate('sub field name')` and `()` is short for `.back()`.
 
 ## Basic Validations
 - **optional()** - if the arg is null or undefined, the following validations will always pass.
@@ -54,53 +84,23 @@ It's actually an extendable module with a very small set of core functions. You 
 - **isFunction()** - check if the arg is function.
 - **isObject()** - check if the arg is object and not null.
 - **isDate()** - check if the arg is an instance of Date.
+- **isArray()** - check if the arg is an array.
 
 ## String Validations
 Thanks for [chriso/validator.js](https://github.com/chriso/validator.js),
-by calling `validate(arg).asString()`, you can switch to another set of validations that is designated for strings.  
+by calling `validate(arg).asString()`, you can switch to another set of validations which is designated for strings.  
 See [full list](https://github.com/chriso/validator.js#validators).  
 **Note**: As mentioned in the [doc](https://github.com/chriso/validator.js#strings-only), these validations are **strings only**, and after you call `asString()`, the arg will be treated as string by the rules.  
 **Note**: As Meteor's `Npm.require` can only work on server side, these string validations can't be used on client side. Howere, you can create your own validator(validations) for replacement. If interested, read on.
+**Node**: After calling `.asString()`, you can't use the basic validations. you can call `.back()` to switch back and use those validations. For more, see the [advanced doc][advanced doc].
 
 ## Advanced Usage
-The true power of this package is not the built-in validations, but the ability for easy extention.  
+See [advanced doc][advanced doc].
 
-### Concepts
-A **Validator** is an object which holds the arg and a set of **Validations**. You create a validator with the arg, call validations on it, that's all.
-There are 2 built-in validator classes: **basic** and **asString**. When you call `validate(arg).basic()` or `validate(arg).asString()`, you actually get a corresponding validator. Note that you can just call `validate(arg)` to get a basic validator because it's **default**.
+## Change Log
+See [change log](https://github.com/zhaoyao91/meteor-validate/blob/master/docs/changelog.md)
 
-### Add Validator
-Call `validate.putValidator(validatorName, options)` to add or override a validator class.  
-After adding validator class, you can call `validate(arg).validatorName()` to use it.
+## Curious Space
+What should this space do?
 
- - **options.converter** function(arg) => arg - a function which converts the arg before validation.
-
-### Add Validations
-Call `validate.extendValidator(validatorName, validations)` to add or override validations to a validator class.  
-After adding validations, you can call `validate(arg).validatorName().validationName(...)` to use it.
-
- - **validations** object - key is the validation name, value is a test function. a test function is function which returns boolean and takes any number of arguments, with the first arg to be validated.
-
-### Default Validator
-Call `validate.setDefaultValidator(validatorName)` to set a default validator class. `validate(arg)` and `someValidator.validate(argName)` will return an instance of default validator class.
-
-## Changelog
-
-### 2.2.0 (2015-06-28)
- - enhance `isType` and `isClass`, now you can specify more targets of **or** relation.
-
-### 2.1.0 (2015-06-28)
- - optimize the syntax for `in` and `notIn`.
-
-### 2.0.1 (2015-06-28)
- - fix that when parent arg is null and optional, error occurs when validate sub fields.
-
-### 2.0.0 (2015-06-28)
- - drop 'str' prefixed validations.
- - add concept of validator and make it extendable.
- - change the api of extention.
- - add some built-in type-checking validations.
- - refactor the codes.
-
-### 1.0.0 (2015-06-27)
- - first version.
+  [advanced doc]: https://github.com/zhaoyao91/meteor-validate/blob/master/docs/advanced.md
