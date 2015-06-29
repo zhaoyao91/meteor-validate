@@ -43,6 +43,6 @@ Call `validate.addValidation(validatorName, validationName, testFunc)` to add or
 ### testFunc(arg, [otherArgs...]) => boolean
 A test function is function which returns boolean and takes any number of arguments, with the first arg to be validated.
 
-### Default Validator
+## Default Validator
 Call `validate.setDefaultValidator(validatorName)` to set default validator class.
 `validate` function and `validate` method of validators will return a **default** validator by this setting.
