@@ -45,4 +45,4 @@ A test function is function which returns boolean and takes any number of argume
 
 ## Default Validator
 Call `validate.setDefaultValidator(validatorName)` to set default validator class.
-`validate` function and `validate` method of validators will return a **default** validator by this setting.
+`validate` function and `validate` method of validators will return a **default** validator by this setting. As you can guess, **basic** is the default default validator class.
