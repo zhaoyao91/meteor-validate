@@ -6,7 +6,8 @@
 `meteor add zhaoyao91:validate`
 
 ## Introduction
-Inspired by [Meteor.check](http://docs.meteor.com/#/full/check), [validator](https://github.com/chriso/validator.js) and [koa-validator](https://github.com/RocksonZeta/koa-validate), this package helps you validate the arguments of methods in a chainable, readable and easy way.  
+Inspired by [Meteor.check](http://docs.meteor.com/#/full/check), [validator](https://github.com/chriso/validator.js) and [koa-validator](https://github.com/RocksonZeta/koa-validate), this package helps you validate the arguments of methods in a chainable, readable and easy way.
+  
 It's actually an extendable module with a very small set of core functions. You can easily add validations to it. Even if you don't want to extend it, the built-in validations and adapted validations from [validator](https://github.com/chriso/validator.js) can help you replace Meteor.check right now.
 
 ## Basic Usage
