@@ -174,6 +174,9 @@ See [change log](https://github.com/zhaoyao91/meteor-validate/blob/master/docs/c
 ## Tests
 Inside the project including this package, type: `VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter zhaoyao91:validate`
 
+## Todos
+Collect more frequent used validations into basic validator. Welcome any helps or suggestions~
+
 ## Curious Space
 What should this space do?
 
