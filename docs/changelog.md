@@ -1,4 +1,6 @@
 # Change Log
+### 3.3.0 (2015-07-01)
+- add **isLength**, **minLength**, **maxLength** validations.
 
 ### 3.2.0 (2015-06-30)
  - enhance **isArray** to check all elements.
