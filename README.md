@@ -152,6 +152,9 @@ If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coff
 - **isDate()** - check if the arg is an instance of Date.
 - **isArray([validation])** - check if the arg is an array.
 - **oneOf(validations)** - check if the arg satisfies one of the validations.
+- **isLength(length)** - check if arg.length equals target length. (.length == length)
+- **minLength(min)** - check if arg.length is not less than min. (.length >= min)
+- **maxLength(max)** - check if arg.length is not more than max. (.length <= max)
 
 ## String Validations
 Thanks for [chriso/validator.js](https://github.com/chriso/validator.js),

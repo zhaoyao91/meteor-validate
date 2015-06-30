@@ -420,4 +420,109 @@ describe('basic validator', function () {
             }).toThrowError(ErrorMsg);
         });
     });
+
+    describe('isLength', function () {
+        it('should pass when is length', function () {
+            expect(function () {
+                validate([1, 2]).isLength(2);
+            }).not.toThrow();
+            expect(function () {
+                validate([]).isLength(0);
+            }).not.toThrow();
+            expect(function () {
+                validate('hi').isLength(2);
+            }).not.toThrow();
+            expect(function () {
+                validate('').isLength(0);
+            }).not.toThrow();
+        });
+
+        it('should throw when is not length', function () {
+            expect(function () {
+                validate([1, 2]).isLength(0);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate([]).isLength(2);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate('hi').isLength(0);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate('').isLength(2);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate(1).isLength(1);
+            }).toThrowError(ErrorMsg);
+        })
+    });
+
+    describe('maxLength', function () {
+        it('should pass when length <= max', function () {
+            expect(function () {
+                validate([1, 2]).maxLength(2);
+            }).not.toThrow();
+            expect(function () {
+                validate([1, 2]).maxLength(3);
+            }).not.toThrow();
+            expect(function () {
+                validate('hi').maxLength(2);
+            }).not.toThrow();
+            expect(function () {
+                validate('hi').maxLength(3);
+            }).not.toThrow();
+            expect(function () {
+                validate([]).maxLength(0);
+            }).not.toThrow();
+            expect(function () {
+                validate('').maxLength(0);
+            }).not.toThrow();
+        });
+
+        it('should throw when length > max', function () {
+            expect(function () {
+                validate([1, 2]).maxLength(1);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate('hi').maxLength(1);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate(1).maxLength(1);
+            }).toThrowError(ErrorMsg);
+        })
+    });
+
+    describe('minLength', function () {
+        it('should pass when length >= min', function () {
+            expect(function () {
+                validate([1, 2]).minLength(2);
+            }).not.toThrow();
+            expect(function () {
+                validate([1, 2]).minLength(1);
+            }).not.toThrow();
+            expect(function () {
+                validate('hi').minLength(2);
+            }).not.toThrow();
+            expect(function () {
+                validate('hi').minLength(1);
+            }).not.toThrow();
+            expect(function () {
+                validate([]).minLength(0);
+            }).not.toThrow();
+            expect(function () {
+                validate('').minLength(0);
+            }).not.toThrow();
+        });
+
+        it('should throw when length < min', function () {
+            expect(function () {
+                validate([1, 2]).minLength(3);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate('hi').minLength(3);
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate(1).minLength(1);
+            }).toThrowError(ErrorMsg);
+        })
+    });
 });

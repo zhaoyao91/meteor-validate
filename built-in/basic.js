@@ -148,6 +148,18 @@ validations = {
             }
         }
         return false;
+    },
+
+    isLength: function(arg, length) {
+        return arg.length == length;
+    },
+
+    minLength: function(arg, min) {
+        return arg.length >= min;
+    },
+
+    maxLength: function(arg, max) {
+        return arg.length <= max;
     }
 
 };
