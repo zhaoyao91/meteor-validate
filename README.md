@@ -45,6 +45,16 @@ You can check if the arg pass one of some validations.
         function(v){v.isString()}
     ])
 
+**Note**: this is a feature of the basic validator, not the core of the package.
+
+### array
+You can check the arg is an array and make sure all elements satisfy some validation.
+
+    validate([1,'2',3]).isArray(); // pass
+    validate([1,'2',3]).isArray(function(v){v.isNumber()}); // throw
+
+**Note**: this is a feature of the basic validator, not the core of the package.
+
 ### sub fields (check object)
 If the arg is an object(or array), you can check it with all the sub fields in one chain!
 
@@ -86,6 +96,8 @@ After version 3.1.0, you can check object in a nested way:
             about:      function(v){v.optional().isString()}
         })}
     });
+    
+**Note**: the nested checking is a feature of the basic validator, not the core of the package.
 
 ### if Lambda is Supported
 If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coffeescript](https://atmospherejs.com/meteor/coffeescript)), then some cases may be even simpler:
@@ -96,6 +108,10 @@ If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coff
         v=>v.isNumber(),
         v=>v.isString()
     )
+
+**isArray**
+
+    validate([1,'2',3]).isArray(v=>v.isNumber())
 
 **isObject**
 
@@ -133,7 +149,7 @@ If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coff
 - **isFunction()** - check if the arg is function.
 - **isObject([validations])** - check if the arg is an object and not null.
 - **isDate()** - check if the arg is an instance of Date.
-- **isArray()** - check if the arg is an array.
+- **isArray(validation)** - check if the arg is an array.
 - **oneOf(validations)** - check if the arg satisfies one of the validations.
 
 ## String Validations

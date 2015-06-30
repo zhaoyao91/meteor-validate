@@ -90,5 +90,18 @@ describe('lambda', function () {
                 ])
             }).toThrowError(ErrorMsg);
         });
-    })
+    });
+
+    describe('isArray', function () {
+        it('should pass when all elements pass', function () {
+            expect(function () {
+                validate([1,2]).isArray(v=>v.isNumber());
+            }).not.toThrow();
+        });
+        it('should throw when any element fails', function(){
+            expect(function () {
+                validate([1,'2',3]).isArray(v=>v.isNumber())
+            }).toThrowError(ErrorMsg);
+        })
+    });
 });

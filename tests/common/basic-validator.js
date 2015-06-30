@@ -376,6 +376,17 @@ describe('basic validator', function () {
             expect(function () {
                 validate(1).isArray();
             }).toThrow();
+        });
+
+        it('should pass when all elements pass', function () {
+            expect(function () {
+                validate([1,2]).isArray(function(v){v.isNumber()});
+            }).not.toThrow();
+        });
+        it('should throw when any element fails', function(){
+            expect(function () {
+                validate([1,'2',3]).isArray(function(v){v.isNumber()})
+            }).toThrowError(ErrorMsg);
         })
     });
 

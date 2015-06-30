@@ -1,16 +1,19 @@
 # Change Log
 
+### 3.2.0 (2015-06-30)
+ - enhance **isArray** to check all elements.
+
 ### 3.1.0 (2015-06-30)
  - enhance **isObject** to check object in a nested way.
- - add **oneOf** validation to basic validator
+ - add **oneOf** validation to basic validator.
  - enable user to set details formatter.
 
 ### 3.0.0 (2015-06-30)
- - optimize the syntax for sub fields checking
- - change the api for extending validator
- - add basic validation `isArray`
- - refactor the codes
- - add tests
+ - optimize the syntax for sub fields checking.
+ - change the api for extending validator.
+ - add basic validation `isArray`.
+ - refactor the codes.
+ - add tests.
 
 ### 2.2.0 (2015-06-28)
  - enhance `isType` and `isClass`, now you can specify more targets of **or** relation.

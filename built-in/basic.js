@@ -121,8 +121,17 @@ validations = {
         return arg instanceof Date;
     },
 
-    isArray: function(arg) {
-        return Array.isArray(arg);
+    isArray: function(arg, validation) {
+        if (Array.isArray(arg)) {
+            if (validation){
+                for (var i in arg) {
+                    var subValidator = this.validator.validate(i.toString(), this.argName + '['+i+']');
+                    validation(subValidator);
+                }
+            }
+            return true;
+        }
+        return false;
     },
 
     oneOf: function(arg, subValidations) {
