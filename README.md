@@ -100,7 +100,7 @@ After version 3.1.0, you can check object in a nested way:
     
 **Note**: the nested checking is a feature of the basic validator, not the core of the package.
 
-### if Lambda is Supported
+### if lambda is supported
 If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coffeescript](https://atmospherejs.com/meteor/coffeescript)), then some cases may be even simpler:
 
 **oneOf**
