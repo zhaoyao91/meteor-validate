@@ -150,7 +150,7 @@ If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coff
 - **isFunction()** - check if the arg is function.
 - **isObject([validations])** - check if the arg is an object and not null.
 - **isDate()** - check if the arg is an instance of Date.
-- **isArray(validation)** - check if the arg is an array.
+- **isArray([validation])** - check if the arg is an array.
 - **oneOf(validations)** - check if the arg satisfies one of the validations.
 
 ## String Validations
