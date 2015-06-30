@@ -103,8 +103,18 @@ validations = {
         return typeof arg === 'function';
     },
 
-    isObject: function (arg) {
-        return arg !== null && typeof arg === 'object';
+    isObject: function (arg, subValidations) {
+        if (arg !== null && typeof arg === 'object') {
+            if (subValidations) {
+                for (var subFieldName in subValidations) {
+                    var subValidation = subValidations[subFieldName];
+                    var subValidator = this.validator.validate(subFieldName);
+                    subValidation(subValidator);
+                }
+            }
+            return true;
+        }
+        else return false;
     },
 
     isDate: function (arg) {
@@ -113,6 +123,22 @@ validations = {
 
     isArray: function(arg) {
         return Array.isArray(arg);
+    },
+
+    oneOf: function(arg, subValidations) {
+        subValidations = getArgArray(subValidations, arguments);
+
+        for (var i in subValidations) {
+            var subValidation = subValidations[i];
+            try {
+                subValidation(this.validator);
+                return true;
+            }
+            catch (error) {
+                if (error.errorType !== 'Match.Error') throw error;
+            }
+        }
+        return false;
     }
 
 };

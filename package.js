@@ -1,6 +1,6 @@
 Package.describe({
     name: 'zhaoyao91:validate',
-    version: '3.0.0',
+    version: '3.1.0',
     summary: 'Validate arguments of methods in an easy way.',
     git: 'https://github.com/zhaoyao91/meteor-validate',
     documentation: 'README.md'
@@ -29,11 +29,15 @@ Package.onUse(function (api) {
 
 Package.onTest(function(api) {
     api.use('sanjo:jasmine@0.14.0');
+    api.use('grigio:babel');
     api.use('zhaoyao91:validate');
 
     api.addFiles('tests/error-msg.js');
+
     api.addFiles('tests/common/basic-validator.js');
     api.addFiles('tests/common/basic-usage.js');
     api.addFiles('tests/common/extend-validator.js');
+    api.addFiles('tests/common/es6.es6');
+
     api.addFiles('tests/server/as-string-validator.js', 'server');
 });

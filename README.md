@@ -32,6 +32,19 @@ The error msg will use the the second parameter as the name of the arg
 
     validate(arg, 'myArg').exists();
 
+### one of
+You can check if the arg pass one of some validations.
+
+    validate(arg).oneOf(
+        function(v){v.isNumber()},
+        function(v){v.isString()}
+    )
+    
+    validate(arg).oneOf([
+        function(v){v.isNumber()},
+        function(v){v.isString()}
+    ])
+
 ### sub fields (check object)
 If the arg is an object(or array), you can check it with all the sub fields in one chain!
 
@@ -61,6 +74,42 @@ If you are already familiar with this pattern, there is a terser syntax for the 
         
 In this way, `('sub field name')` is short for `.validate('sub field name')` and `()` is short for `.back()`.
 
+After version 3.1.0, you can check object in a nested way:
+
+    validate(arg).isObject({
+        id:         function(v){v.optional().isString()},
+        projectId:  function(v){v.optional().isString()},
+        role:       function(v){v.optional().isString()},
+        profile:    function(v){v.isObject({
+            user:       function(v){v.optional().isString()},
+            picture:    function(v){v.optional().isString()},
+            about:      function(v){v.optional().isString()}
+        })}
+    });
+
+### if Lambda is Supported
+If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coffeescript](https://atmospherejs.com/meteor/coffeescript)), then some cases may be even simpler:
+
+**oneOf**
+
+    validate(1).oneOf(
+        v=>v.isNumber(),
+        v=>v.isString()
+    )
+
+**isObject**
+
+    validate(arg).isObject({
+       id:          v=>v.optional().isString(),
+       projectId:   v=>v.optional().isString(),
+       role:        v=>v.optional().isString(),
+       profile:     v=>v.isObject({
+           user:        v=>v.optional().isString(),
+           picture:     v=>v.optional().isString(),
+           about:       v=>v.optional().isString()
+       })
+    });
+
 ## Basic Validations
 - **optional()** - if the arg is null or undefined, the following validations will always pass.
 - **where(func)** - the func receives one arg(the arg to be validate) and returns boolean to tell if it's valid.
@@ -82,9 +131,10 @@ In this way, `('sub field name')` is short for `.validate('sub field name')` and
 - **isNumber()** - check if the arg is number.
 - **isString()** - check if the arg is String.
 - **isFunction()** - check if the arg is function.
-- **isObject()** - check if the arg is object and not null.
+- **isObject([validations])** - check if the arg is an object and not null.
 - **isDate()** - check if the arg is an instance of Date.
 - **isArray()** - check if the arg is an array.
+- **oneOf(validations)** - check if the arg satisfies one of the validations.
 
 ## String Validations
 Thanks for [chriso/validator.js](https://github.com/chriso/validator.js),
@@ -103,6 +153,9 @@ See [advanced doc][advanced doc].
 
 ## Change Log
 See [change log](https://github.com/zhaoyao91/meteor-validate/blob/master/docs/changelog.md)
+
+## Tests
+Inside the project including this package, type: `VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter zhaoyao91:validate`
 
 ## Curious Space
 What should this space do?

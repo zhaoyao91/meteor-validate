@@ -89,17 +89,34 @@ describe('basic usage', function () {
                 ('role').optional().isString();
         };
 
+        // this is in fact a feature of basic validator, not the core of the package
+        var checkFunc3 = function(arg) {
+            validate(arg).isObject({
+                id: function(v){v.optional().isString()},
+                projectId: function(v){v.optional().isString()},
+                role: function(v){v.optional().isString()},
+                profile: function(v){v.isObject({
+                    user: function(v){v.optional().isString()},
+                    picture: function(v){v.optional().isString()},
+                    about: function(v){v.optional().isString()}
+                })}
+            });
+        };
+
         it('should pass when all sub field validations pass', function () {
             expect(checkFunc1.bind(null, obj)).not.toThrow();
             expect(checkFunc2.bind(null, obj)).not.toThrow();
+            expect(checkFunc3.bind(null, obj)).not.toThrow();
         });
 
         it('should throw when some sub field validations fail', function () {
             expect(checkFunc2.bind(null, obj1)).toThrowError(ErrorMsg);
             expect(checkFunc1.bind(null, obj1)).toThrowError(ErrorMsg);
+            expect(checkFunc3.bind(null, obj1)).toThrowError(ErrorMsg);
 
             expect(checkFunc2.bind(null, obj2)).toThrowError(ErrorMsg);
             expect(checkFunc1.bind(null, obj2)).toThrowError(ErrorMsg);
+            expect(checkFunc3.bind(null, obj2)).toThrowError(ErrorMsg);
         })
     })
 });

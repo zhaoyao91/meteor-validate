@@ -378,4 +378,35 @@ describe('basic validator', function () {
             }).toThrow();
         })
     });
+
+    describe('oneOf', function() {
+        it('should be ok when one of validation pass', function(){
+            expect(function () {
+                validate(1).oneOf(
+                    function(v){v.isNumber()},
+                    function(v){v.isString()}
+                )
+            }).not.toThrow();
+            expect(function () {
+                validate('1').oneOf([
+                    function(v){v.isNumber()},
+                    function(v){v.isString()}
+                ])
+            }).not.toThrow();
+        });
+        it('should throw when all of the validations fail', function() {
+            expect(function () {
+                validate({}).oneOf(
+                    function(v){v.isNumber()},
+                    function(v){v.isString()}
+                )
+            }).toThrowError(ErrorMsg);
+            expect(function () {
+                validate({}).oneOf([
+                    function(v){v.isNumber()},
+                    function(v){v.isString()}
+                ])
+            }).toThrowError(ErrorMsg);
+        });
+    });
 });

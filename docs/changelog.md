@@ -1,5 +1,10 @@
 # Change Log
 
+### 3.1.0 (2015-06-30)
+ - enhance **isObject** to check object in a nested way.
+ - add **oneOf** validation to basic validator
+ - enable user to set details formatter.
+
 ### 3.0.0 (2015-06-30)
  - optimize the syntax for sub fields checking
  - change the api for extending validator
