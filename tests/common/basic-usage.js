@@ -118,5 +118,18 @@ describe('basic usage', function () {
             expect(checkFunc1.bind(null, obj2)).toThrowError(ErrorMsg);
             expect(checkFunc3.bind(null, obj2)).toThrowError(ErrorMsg);
         })
+    });
+
+    describe('not', function() {
+        it('should pass when not pass', function() {
+            expect(function () {
+                validate(1).not().isString().isNumber();
+            }).not.toThrow();
+        });
+        it('should not pass when pass', function() {
+           expect(function () {
+               validate(1).not().isNumber();
+           }).toThrowError(ErrorMsg);
+        });
     })
 });

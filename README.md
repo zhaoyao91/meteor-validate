@@ -17,11 +17,6 @@ and the client will receive the corresponding Meteor.Error with details.
 
     validate(arg).exists(); // check the arg is not null or undefined
 
-### optional
-If the arg is optional and is null or undefined, all the following validations will pass
-
-    validate(null).optional().isNumber(); // pass
-
 ### chain
 You can check an arg more than once in a validation chain.
 
@@ -32,6 +27,20 @@ You can check an arg more than once in a validation chain.
 The error msg will use the the second parameter as the name of the arg
 
     validate(arg, 'myArg').exists();
+
+### optional
+If the arg is optional and is null or undefined, all the following validations will pass.
+
+    validate(null).optional().isNumber(); // pass
+    validate('bob').optional().isNumber(); // throw
+
+### not
+You can check the opposite of a validation.
+
+    validate('bob').not().isNumber(); // pass
+    validate(1).not().isNumber(); // throw
+    
+**Note**: `.not()` only affects the following **one** validation.
 
 ### one of
 You can check if the arg pass one of some validations.
