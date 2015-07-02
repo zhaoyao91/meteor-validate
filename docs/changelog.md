@@ -2,6 +2,7 @@
 
 ### 3.4.0 (2015-07-02)
  - add `not` validation. 
+ - `.not().optional()` is alias to `.exists()`.
 
 ### 3.3.0 (2015-07-01)
  - add **isLength**, **minLength**, **maxLength** validations.

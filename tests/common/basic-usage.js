@@ -131,5 +131,18 @@ describe('basic usage', function () {
                validate(1).not().isNumber();
            }).toThrowError(ErrorMsg);
         });
+    });
+
+    describe('not optional', function() {
+        it('should pass when exists and not optional', function () {
+            expect(function () {
+                validate(1).not().optional().isNumber();
+            }).not.toThrow();
+        });
+        it('should not pass when not exists and not optional', function () {
+            expect(function () {
+                validate(null).not().optional().isNull();
+            }).toThrowError(ErrorMsg);
+        })
     })
 });

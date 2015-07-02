@@ -137,6 +137,7 @@ If lambda is supported(by [es6](https://github.com/grigio/meteor-babel) or [coff
     });
 
 ## Basic Validations
+- **not()** - the following validation will check its opposite. **Note**: `.not().optional()` is alias to `.exists()`.
 - **optional()** - if the arg is null or undefined, the following validations will always pass.
 - **where(func)** - the func receives one arg(the arg to be validate) and returns boolean to tell if it's valid.
 - **exists()** - check if the arg is not null or undefined.
