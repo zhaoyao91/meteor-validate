@@ -188,8 +188,9 @@ See [change log](https://github.com/zhaoyao91/meteor-validate/blob/master/docs/c
 Inside the project including this package, type: `VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter zhaoyao91:validate`
 
 ## Todos
-- Collect more frequent used validations into basic validator. Welcome any helps or suggestions.
-- Implement string validations in basic validator.
+- collect more frequent used validations into basic validator. Welcome any helps or suggestions.
+- implement string validations in basic validator.
+- add type of arg to error details.
 
 ## Curious Space
 What should this space do?
